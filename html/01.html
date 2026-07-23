@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <title>个人信息展示区</title>
+
+<div class="box">
+    <h1><b>应用科技学院 - 个人信息</b></h1>
+    <p><b>姓名：</b>张三</p>
+    <p><b>专业：</b>计算机科学与技术</p>
+    <p><b>基础学分：</b>80 分</p>
+    <hr>
+    <h1><b>综测加分计算器</b></h1>
+    <div style="margin: 20px 0 10px 0;">
+        <label for="bonusInput">加分：</label>
+        <input type="number" id="bonusInput" placeholder="例如：5" style="width:80px;">
+        <button id="calcBtn">计算总分</button>
+    </div>
+
+    <div class="result" id="resultDisplay">
+        预估总分：等待计算...
+    </div>
+</div>
+
+<script>
+
+    var inputBox = document.getElementById('bonusInput');
+    var calcBtn = document.getElementById('calcBtn');
+    var resultPara = document.getElementById('resultDisplay');
+    var baseScore = 80;  
+
+    calcBtn.addEventListener('click', function() {
+        var bonus = Number(inputBox.value);  
+        var total = baseScore + bonus;  
+        resultPara.innerHTML = '计算成功！预估总分为：<strong>' + total + ' 分</strong>';
+    });
+</script>
+</html>
