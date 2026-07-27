@@ -46,7 +46,7 @@
       margin-top: 10px;
     }
     .cta button {
-      background: #ff6b35;
+      background: rgba(255, 255, 255, 0.1);
       border: none;
       padding: 12px 30px;
       border-radius: 50px;
@@ -58,7 +58,7 @@
       margin-right: 10px;
     }
     .cta button:hover {
-      background: #e6653b;
+      background: rgba(255, 255, 255, 0.1);
       transform: scale(1.03);
     }
     .cta button i {
@@ -109,8 +109,9 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(4px);
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -124,14 +125,15 @@
       opacity: 1;
     }
     .modal-box {
-      background: rgba(30, 30, 30, 0.85);
-      backdrop-filter: blur(15px);
+      background: rgba(18, 22, 32, 0.5);
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
       border-radius: 20px;
       padding: 30px 35px;
       max-width: 480px;
       width: 90%;
       color: #fff;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+      box-shadow: 0 15px 40px rgba(100, 89, 89, 0.8);
       border: 1px solid rgba(255,255,255,0.2);
       text-align: center;
     }
@@ -170,7 +172,7 @@
       border-bottom: none;
     }
     .modal-close-btn {
-      background: #ff6b35;
+      background: rgba(255, 255, 255, 0.1);
       border: none;
       padding: 10px 30px;
       border-radius: 50px;
@@ -181,9 +183,12 @@
       transition: 0.3s;
     }
     .modal-close-btn:hover {
-      background: #e6653b;
-      transform: scale(1.03);
-    }
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.03);
+  transition: all 0.2s;
+}
+
+
   </style>
 </head>
 <body>
@@ -229,7 +234,7 @@
           计算总分
           <i class="fa-solid fa-arrow-right"></i>
         </button>
-        <button id="clearBtn" style="background: #6c757d;">
+        <button id="clearBtn" style="background: rgba(255, 255, 255, 0.1);">
           清空记录
           <i class="fa-solid fa-rotate-left"></i>
         </button>
@@ -253,7 +258,7 @@
         <ul id="modalRecordList">
         </ul>
       </div>
-      <button class="modal-close-btn" id="closeModalBtn">关闭</button>
+      <button class="modal-close-btn" id="closeModalBtn" style="background: rgba(255, 255, 255, 0.1);" >关闭</button>
     </div>
   </div>
   <script>
