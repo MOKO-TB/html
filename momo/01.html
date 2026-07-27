@@ -37,7 +37,7 @@
     .info-wrap label {
       color: #f1f0ea; 
     }
-    .info-wrap input {
+    .info-wrap input, .info-wrap select {
       background: #fff;
       color: #333;
       font-size: 1rem;
@@ -55,6 +55,7 @@
       font-size: 1.1rem;
       cursor: pointer;
       transition: 0.3s;
+      margin-right: 10px;
     }
     .cta button:hover {
       background: #e6653b;
@@ -76,6 +77,31 @@
       border: 0;
       height: 1px;
       background: rgba(255, 255, 255, 0.3);
+    }
+    .record-section {
+      margin-top: 25px;
+      text-align: left;
+    }
+    .record-section h4 {
+      margin-bottom: 10px;
+      color: #fcfbf9;
+    }
+    #recordList {
+      list-style: none;
+      padding: 0;
+      max-height: 200px;
+      overflow-y: auto;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    #recordList li {
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      font-size: 0.95rem;
+    }
+    #recordList li:last-child {
+      border-bottom: none;
     }
   </style>
 </head>
@@ -104,6 +130,14 @@
         <label for="bonusInput" style="color: #fcfbf9; font-weight: bold;">加分：</label>
         <input type="number" id="bonusInput" placeholder="例如：5" style="width:80px; padding: 5px; border-radius: 4px; border: none;">
       </div>
+      <div style="margin: 15px 0 10px 0;">
+        <label for="reasonSelect" style="color: #fcfbf9; font-weight: bold;">加分原因：</label>
+        <select id="reasonSelect" style="padding: 5px; border-radius: 4px; border: none; width:150px;">
+          <option value="竞赛获奖">竞赛获奖</option>
+          <option value="优秀班干">优秀班干</option>
+          <option value="志愿服务">志愿服务</option>
+        </select>
+      </div>
 
       <div id="resultDisplay" style="color: #fff; background: rgba(0,0,0,0.4); padding: 10px 20px; border-radius: 8px;">
         预估总分：等待计算...
@@ -114,21 +148,58 @@
           计算总分
           <i class="fa-solid fa-arrow-right"></i>
         </button>
+        <button id="clearBtn" style="background: #6c757d;">
+          清空记录
+          <i class="fa-solid fa-rotate-left"></i>
+        </button>
+      </div>
+
+      <div class="record-section">
+        <h4>加分记录</h4>
+        <ul id="recordList">
+          <li>暂无记录</li>
+        </ul>
       </div>
     </div>
-
   </div>
+
   <script>
+    var records = [];
+
     var inputBox = document.getElementById('bonusInput');
+    var reasonSelect = document.getElementById('reasonSelect');
     var calcBtn = document.getElementById('calcBtn');
-    var resultPara = document.getElementById('resultDisplay');
+    var clearBtn = document.getElementById('clearBtn');
+    var resultDisplay = document.getElementById('resultDisplay');
+    var recordList = document.getElementById('recordList');
     var baseScore = 80;
 
     calcBtn.addEventListener('click', function() {
-      var bonus = Number(inputBox.value);
-      if (isNaN(bonus)) bonus = 0;
-      var total = baseScore + bonus;
-      resultPara.innerHTML = '计算成功！预估总分为：<strong>' + total + ' 分</strong>';
+      var input = inputBox.value;
+      var reason = reasonSelect.value;
+      var x = Number(input);
+      if (isNaN(x) || x <= 0) {
+        resultDisplay.innerText = '错误：加分必须大于0！';
+        return;
+      }
+
+      var total = baseScore + x;
+      resultDisplay.innerText = '计算成功！预估总分为：' + total + ' 分（加分原因：' + reason + '）';
+      var recordStr = reason + ' +' + x + ' 分，当前总分：' + total;
+      records.push(recordStr);
+      console.log(records);
+      var listHtml = '';
+      for (var i = 0; i < records.length; i++) {
+        listHtml += '<li>' + records[i] + '</li>';
+      }
+      recordList.innerHTML = listHtml;
+    });
+
+    clearBtn.addEventListener('click', function() {
+      inputBox.value = '';
+      resultDisplay.innerText = '预估总分：等待计算...';
+      records = [];
+      recordList.innerHTML = '<li>暂无记录</li>';
     });
   </script>
 
