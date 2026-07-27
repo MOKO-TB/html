@@ -118,7 +118,7 @@ nav:hover > a:not(:hover) {
   font-weight: 800;
   letter-spacing: 50px;
   text-transform: uppercase;
-  color: white;
+  color: rgb(238, 98, 17);
   text-align: center;
   margin: -20px 0;
 }
@@ -282,4 +282,9 @@ nav {
 
 .slider {
   animation: zoomOut 1.2s ease-out forwards;
+}
+.info-wrap {
+  opacity: 0;
+  animation: bottomInText 1.2s ease-out forwards;
+  animation-delay: 0.25s; 
 }

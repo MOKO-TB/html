@@ -24,7 +24,7 @@
       width: 100%;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(8px);
-      padding: 30px 40px;
+      padding: 30px 90px;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       margin: 20px 0;
@@ -38,7 +38,7 @@
       color: #f1f0ea; 
     }
     .info-wrap input, .info-wrap select {
-      background: #fff;
+      background: #fdfcfc;
       color: #333;
       font-size: 1rem;
     }
@@ -103,6 +103,87 @@
     #recordList li:last-child {
       border-bottom: none;
     }
+     .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.3s, opacity 0.3s;
+    }
+    .modal-overlay.show {
+      visibility: visible;
+      opacity: 1;
+    }
+    .modal-box {
+      background: rgba(30, 30, 30, 0.85);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 30px 35px;
+      max-width: 480px;
+      width: 90%;
+      color: #fff;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+      border: 1px solid rgba(255,255,255,0.2);
+      text-align: center;
+    }
+    .modal-box h3 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      color: #ff6b35;
+    }
+    .modal-result {
+      background: rgba(0,0,0,0.4);
+      padding: 15px;
+      border-radius: 12px;
+      margin: 20px 0;
+      font-size: 1.2rem;
+    }
+    .modal-records {
+      text-align: left;
+      max-height: 200px;
+      overflow-y: auto;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .modal-records ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .modal-records li {
+      padding: 6px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      font-size: 0.95rem;
+    }
+    .modal-records li:last-child {
+      border-bottom: none;
+    }
+    .modal-close-btn {
+      background: #ff6b35;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 50px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .modal-close-btn:hover {
+      background: #e6653b;
+      transform: scale(1.03);
+    }
   </style>
 </head>
 <body>
@@ -162,7 +243,19 @@
       </div>
     </div>
   </div>
-
+<div class="modal-overlay" id="customModal">
+    <div class="modal-box">
+      <h3>计算成功！</h3>
+      <div class="modal-result" id="modalTotal">
+      </div>
+      <div class="modal-records">
+        <strong>加分记录：</strong>
+        <ul id="modalRecordList">
+        </ul>
+      </div>
+      <button class="modal-close-btn" id="closeModalBtn">关闭</button>
+    </div>
+  </div>
   <script>
     var records = [];
 
@@ -173,6 +266,21 @@
     var resultDisplay = document.getElementById('resultDisplay');
     var recordList = document.getElementById('recordList');
     var baseScore = 80;
+    var modal = document.getElementById('customModal');
+    var modalTotal = document.getElementById('modalTotal');
+    var modalRecordList = document.getElementById('modalRecordList');
+    var closeModalBtn = document.getElementById('closeModalBtn');
+
+
+    function closeModal() {
+      modal.classList.remove('show');
+    }
+    closeModalBtn.addEventListener('click', closeModal);
+     modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
 
     calcBtn.addEventListener('click', function() {
       var input = inputBox.value;
@@ -193,8 +301,18 @@
         listHtml += '<li>' + records[i] + '</li>';
       }
       recordList.innerHTML = listHtml;
-    });
+       console.log(records);
 
+  
+      modalTotal.innerText = '预估总分：' + total + ' 分（加分原因：' + reason + '）';
+      var modalListHtml = '';
+      for (var j = 0; j < records.length; j++) {
+        modalListHtml += '<li>' + records[j] + '</li>';
+      }
+      modalRecordList.innerHTML = modalListHtml;
+
+      modal.classList.add('show');
+    });
     clearBtn.addEventListener('click', function() {
       inputBox.value = '';
       resultDisplay.innerText = '预估总分：等待计算...';
