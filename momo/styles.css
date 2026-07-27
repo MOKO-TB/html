@@ -118,7 +118,7 @@ nav:hover > a:not(:hover) {
   font-weight: 800;
   letter-spacing: 50px;
   text-transform: uppercase;
-  color: rgb(238, 98, 17);
+  color: rgb(255, 255, 255);
   text-align: center;
   margin: -20px 0;
 }
