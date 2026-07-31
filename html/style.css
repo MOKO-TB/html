@@ -1,0 +1,92 @@
+body {
+  background-color: #f0f0f0; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.box {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  width: 450px;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: "Microsoft YaHei";
+  color: #333;
+  font-size: 22px;
+  margin: 0 0 10px 0;
+}
+
+p {
+  font-size: 16px;
+  color: #666;
+  margin: 6px 0;
+}
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #667eea;
+  display: block;
+  margin: 0 auto 12px;
+  object-fit: cover;
+}
+
+/* 输入框、下拉与按钮（任务6） */
+input[type="number"], input[type="text"], .input-box {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  width: 80px;
+  text-align: center;
+  outline: none;
+}
+
+select {
+  padding: 8px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  width: 150px;
+  outline: none;
+}
+
+button {
+  background-color: rgb(0, 252, 134);
+  color: rgb(253, 252, 252);
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 10px 5px;
+}
+
+
+#clearBtn, .btn-clear {
+  background: #e74c3c;
+}
+
+.result, #result {
+  color: #2ecc71;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.record-section h4 {
+  margin: 16px 0 6px 0;
+}
+
+.record-section ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.record-section li {
+  margin: 6px 0;
+  color: #444;
+}
