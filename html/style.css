@@ -38,7 +38,6 @@ p {
   object-fit: cover;
 }
 
-/* 输入框、下拉与按钮（任务6） */
 input[type="number"], input[type="text"], .input-box {
   border: 2px solid #ddd;
   border-radius: 8px;
